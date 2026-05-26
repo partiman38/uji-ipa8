@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ujicoba ASAT - IPA | SMP Kelas 8</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1a56db;
+  --primary-dark: #1041a8;
+  --primary-light: #e8f0fe;
+  --secondary: #0891b2;
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --answered: #16a34a;
+  --unanswered: #e5e7eb;
+  --flagged: #f59e0b;
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --surface2: #f8fafc;
+  --border: #e2e8f0;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --sidebar-w: 220px;
+  --header-h: 60px;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; user-select: none; }
+body.allow-select { user-select: text; }
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ===== HOME PAGE ===== */
+#page-home {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a56db 0%, #0891b2 100%);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+#page-home::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.home-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  position: relative;
+  z-index: 1;
+}
+.home-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.home-logo-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #1a56db, #0891b2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 22px;
+}
+.home-logo-text { line-height: 1.2; }
+.home-logo-text strong { display: block; font-size: 18px; font-weight: 800; color: var(--primary); }
+.home-logo-text span { font-size: 12px; color: var(--text-muted); }
+.home-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+.home-title { font-size: 26px; font-weight: 800; color: var(--text); margin-bottom: 4px; line-height: 1.2; }
+.home-subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 28px; }
+.exam-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.meta-item {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+}
+.meta-label { font-size: 10px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+.meta-value { font-size: 14px; font-weight: 700; color: var(--text); }
+.form-group { margin-bottom: 16px; }
+.form-label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.form-label span { color: var(--danger); }
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  background: white;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,86,219,0.1); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.btn-primary { background: var(--primary); color: white; width: 100%; }
+.btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(26,86,219,0.3); }
+.btn-outline { background: transparent; color: var(--text-muted); border: 1.5px solid var(--border); width: 100%; margin-top: 10px; font-size: 13px; }
+.btn-outline:hover { border-color: var(--text-muted); color: var(--text); }
+.home-footer { text-align: center; margin-top: 20px; font-size: 11px; color: var(--text-light); }
+
+/* ===== EXAM PAGE ===== */
+#page-exam { display: none; min-height: 100vh; flex-direction: column; }
+.exam-header {
+  height: var(--header-h);
+  background: white;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 16px;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.header-brand { display: flex; align-items: center; gap: 10px; }
+.header-brand-icon { width: 34px; height: 34px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 15px; }
+.header-brand-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.header-brand-sub { font-size: 11px; color: var(--text-muted); }
+.header-center { flex: 1; text-align: center; }
+.header-exam-title { font-size: 15px; font-weight: 700; color: var(--text); }
+.header-exam-info { font-size: 11px; color: var(--text-muted); }
+.header-right { display: flex; align-items: center; gap: 12px; }
+.timer-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-light);
+  border: 1.5px solid var(--primary);
+  border-radius: 8px;
+  padding: 6px 14px;
+}
+.timer-icon { color: var(--primary); font-size: 16px; }
+.timer-display { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--primary); letter-spacing: 1px; }
+.timer-box.warning { background: #fff7ed; border-color: var(--warning); }
+.timer-box.warning .timer-icon, .timer-box.warning .timer-display { color: var(--warning); }
+.timer-box.danger { background: #fef2f2; border-color: var(--danger); animation: pulse 1s infinite; }
+.timer-box.danger .timer-icon, .timer-box.danger .timer-display { color: var(--danger); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
+.student-info-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+.student-avatar {
+  width: 28px; height: 28px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 12px; font-weight: 700;
+}
+.student-info-text strong { display: block; font-size: 12px; font-weight: 700; }
+.student-info-text span { font-size: 10px; color: var(--text-muted); }
+
+/* ===== EXAM BODY ===== */
+.exam-body {
+  display: flex;
+  margin-top: var(--header-h);
+  min-height: calc(100vh - var(--header-h));
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: var(--sidebar-w);
+  background: white;
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sidebar-section-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-light); margin-bottom: 4px; }
+.sidebar-legend { display: flex; flex-direction: column; gap: 5px; margin-bottom: 4px; }
+.legend-item { display: flex; align-items: center; gap: 7px; font-size: 11px; color: var(--text-muted); }
+.legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+.legend-dot.answered { background: var(--answered); }
+.legend-dot.unanswered { background: var(--unanswered); border: 1.5px solid #d1d5db; }
+.legend-dot.flagged { background: var(--flagged); }
+.legend-dot.current { background: var(--primary); }
+.question-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.q-btn {
+  aspect-ratio: 1;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  background: var(--unanswered);
+  color: var(--text-muted);
+}
+.q-btn:hover { transform: scale(1.1); z-index: 1; }
+.q-btn.answered { background: var(--answered); color: white; }
+.q-btn.flagged { background: var(--flagged); color: white; }
+.q-btn.current { background: var(--primary); color: white; box-shadow: 0 0 0 2px white, 0 0 0 4px var(--primary); }
+.sidebar-stats { border-top: 1px solid var(--border); padding-top: 12px; }
+.stat-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; padding: 3px 0; }
+.stat-label { color: var(--text-muted); }
+.stat-value { font-weight: 700; }
+.stat-value.green { color: var(--success); }
+.stat-value.gray { color: var(--text-muted); }
+.stat-value.orange { color: var(--warning); }
+.btn-submit-sidebar {
+  background: var(--danger);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.btn-submit-sidebar:hover { background: #b91c1c; }
+
+/* ===== MAIN CONTENT ===== */
+.exam-main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  padding: 24px;
+  max-width: calc(100% - var(--sidebar-w));
+}
+.question-card {
+  background: white;
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+  max-width: 760px;
+  margin: 0 auto;
+}
+.q-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.q-number {
+  background: var(--primary);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.q-type-badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.q-type-badge.HOTS { background: #fef3c7; color: #92400e; }
+.q-type-badge.REGULER { background: #e0f2fe; color: #0c4a6e; }
+.q-type-badge.hots { background: #fef3c7; color: #92400e; }
+.q-type-badge.reguler { background: #e0f2fe; color: #0c4a6e; }
+.q-intro {
+  background: var(--surface2);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.q-content {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+.q-image {
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+  background: var(--surface2);
+}
+.q-image-placeholder {
+  width: 100%;
+  height: 160px;
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--text-light);
+  font-size: 13px;
+  gap: 8px;
+  background: var(--surface2);
+}
+
+/* Options */
+.options-list { display: flex; flex-direction: column; gap: 8px; }
+.option-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: white;
+}
+.option-item:hover { border-color: var(--primary); background: var(--primary-light); }
+.option-item.selected { border-color: var(--primary); background: var(--primary-light); }
+.option-item.selected .option-letter { background: var(--primary); color: white; border-color: var(--primary); }
+.option-letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: all 0.15s;
+  color: var(--text-muted);
+}
+.option-text { font-size: 14px; line-height: 1.5; padding-top: 2px; }
+
+/* Complex multiple choice */
+.option-item.checkbox-style .option-letter {
+  border-radius: 4px;
+}
+
+/* True-False */
+.tf-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tf-option {
+  padding: 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.15s;
+  color: var(--text-muted);
+}
+.tf-option:hover, .tf-option.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+
+/* Matching */
+.matching-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.matching-left { padding: 10px 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; font-size: 13px; }
+.matching-arrow { color: var(--text-light); font-size: 18px; }
+.matching-select {
+  padding: 9px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--text);
+  background: white;
+  cursor: pointer;
+  outline: none;
+}
+.matching-select:focus { border-color: var(--primary); }
+
+/* Fill in blank */
+.fill-blank-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+  margin-top: 8px;
+}
+.fill-blank-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,86,219,0.1); }
+
+/* Q Footer */
+.q-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.btn-flag {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  background: white;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.btn-flag:hover, .btn-flag.active { background: #fffbeb; border-color: var(--flagged); color: var(--flagged); }
+.nav-buttons { display: flex; gap: 8px; }
+.btn-nav {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  background: white;
+  color: var(--text);
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.btn-nav:hover { background: var(--surface2); }
+.btn-nav.primary { background: var(--primary); border-color: var(--primary); color: white; }
+.btn-nav.primary:hover { background: var(--primary-dark); }
+.btn-nav:disabled { opacity: 0.4; cursor: not-allowed; transform: none!important; }
+
+/* ===== OVERLAYS ===== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.overlay.active { display: flex; }
+
+/* Anti-cheat overlay */
+#cheat-overlay {
+  background: rgba(220, 38, 38, 0.97);
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+  padding: 20px;
+  color: white;
+}
+#cheat-overlay .warning-icon { font-size: 64px; animation: shake 0.5s infinite; }
+@keyframes shake { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
+#cheat-overlay h2 { font-size: 32px; font-weight: 800; letter-spacing: 1px; }
+#cheat-overlay p { font-size: 16px; opacity: 0.9; }
+#cheat-countdown { font-size: 72px; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
+#cheat-return-btn {
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 40px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  animation: breathe 1.5s infinite;
+}
+@keyframes breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.04)} }
+.violation-badge { background: rgba(255,255,255,0.2); border-radius: 8px; padding: 8px 20px; font-size: 13px; }
+
+/* Modal overlay */
+#modal-overlay {
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+}
+.modal {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+.modal-icon { font-size: 48px; margin-bottom: 12px; }
+.modal h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+.modal p { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
+.modal-actions { display: flex; gap: 10px; }
+.modal-actions .btn { flex: 1; }
+.btn-cancel { background: var(--surface2); color: var(--text); border: 1.5px solid var(--border); }
+.btn-danger-filled { background: var(--danger); color: white; }
+
+/* Password modal */
+#pw-modal-overlay { background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+.pw-modal { background: white; border-radius: 16px; padding: 32px; max-width: 360px; width: 100%; box-shadow: var(--shadow-lg); }
+.pw-modal h3 { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+.pw-modal p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+.pw-error { color: var(--danger); font-size: 12px; margin-top: 6px; display: none; }
+
+/* ===== RESULTS PAGE ===== */
+#page-result { display: none; min-height: 100vh; background: var(--bg); }
+.result-header {
+  background: linear-gradient(135deg, #1a56db, #0891b2);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+.result-header h1 { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
+.result-header p { font-size: 14px; opacity: 0.85; }
+.result-score-circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 24px auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.score-number { font-size: 40px; font-weight: 800; color: var(--primary); line-height: 1; }
+.score-label { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+.result-body { max-width: 800px; margin: 0 auto; padding: 24px 20px 40px; }
+.result-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.summary-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.summary-card .s-value { font-size: 24px; font-weight: 800; }
+.summary-card .s-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.summary-card.green .s-value { color: var(--success); }
+.summary-card.red .s-value { color: var(--danger); }
+.summary-card.blue .s-value { color: var(--primary); }
+.summary-card.orange .s-value { color: var(--warning); }
+.result-section-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.detail-item {
+  background: white;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--border);
+}
+.detail-item.correct { border-left-color: var(--success); }
+.detail-item.wrong { border-left-color: var(--danger); }
+.detail-item.unanswered { border-left-color: var(--text-light); }
+.detail-q-num { font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.detail-q-text { font-size: 13px; color: var(--text); margin-bottom: 8px; font-weight: 500; }
+.detail-answers { display: flex; gap: 16px; font-size: 12px; flex-wrap: wrap; }
+.detail-answer-item { display: flex; align-items: center; gap: 4px; }
+.answer-chip {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 12px;
+}
+.answer-chip.student { background: #fef3c7; color: #92400e; }
+.answer-chip.correct-ans { background: #dcfce7; color: #166534; }
+.detail-explanation { margin-top: 8px; font-size: 12px; color: var(--text-muted); background: var(--surface2); border-radius: 6px; padding: 8px 10px; line-height: 1.6; }
+.suggestion-box {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+  border: 1px solid #e0f2fe;
+}
+.suggestion-box h3 { font-size: 14px; font-weight: 700; color: var(--secondary); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.suggestion-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.suggestion-list li { font-size: 13px; color: var(--text-muted); display: flex; align-items: flex-start; gap: 6px; line-height: 1.5; }
+.suggestion-list li::before { content: '→'; color: var(--secondary); font-weight: 700; margin-top: 1px; flex-shrink: 0; }
+.result-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+.btn-result {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  background: white;
+  color: var(--text);
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.btn-result:hover { background: var(--surface2); }
+.btn-result.primary { background: var(--primary); border-color: var(--primary); color: white; }
+.btn-result.primary:hover { background: var(--primary-dark); }
+
+/* ===== TEACHER MODE ===== */
+#page-teacher { display: none; min-height: 100vh; background: var(--bg); }
+.teacher-header {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.teacher-header h1 { font-size: 16px; font-weight: 800; }
+.teacher-body { max-width: 900px; margin: 0 auto; padding: 24px 20px; }
+.teacher-tabs { display: flex; gap: 4px; background: var(--surface2); border-radius: 10px; padding: 4px; margin-bottom: 24px; }
+.tab-btn {
+  flex: 1;
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.tab-btn.active { background: white; color: var(--primary); box-shadow: var(--shadow); }
+.q-editor-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+  border: 1.5px solid transparent;
+  transition: border-color 0.2s;
+}
+.q-editor-card:hover { border-color: var(--border); }
+.q-editor-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.q-editor-num { background: var(--primary); color: white; width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+.q-editor-type { flex: 1; }
+.q-editor-actions { display: flex; gap: 6px; }
+.btn-icon {
+  width: 30px; height: 30px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  transition: all 0.15s;
+}
+.btn-icon:hover { background: var(--surface2); }
+.btn-icon.danger:hover { background: #fef2f2; border-color: var(--danger); color: var(--danger); }
+.editor-field { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 13px; color: var(--text); outline: none; resize: vertical; transition: border-color 0.2s; }
+.editor-field:focus { border-color: var(--primary); }
+.editor-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; display: block; }
+.editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.editor-options { display: flex; flex-direction: column; gap: 6px; }
+.editor-option-row { display: flex; align-items: center; gap: 8px; }
+.option-letter-label { font-size: 12px; font-weight: 700; color: var(--text-muted); width: 16px; }
+.correct-indicator {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.correct-indicator.active { background: var(--success); border-color: var(--success); }
+.teacher-answer-key {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+.answer-key-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.answer-key-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--surface2);
+  border-radius: 6px;
+  font-size: 13px;
+}
+.answer-key-item .aq-num { font-weight: 700; color: var(--text); }
+.answer-key-item .aq-ans { font-weight: 800; color: var(--primary); font-family: 'JetBrains Mono', monospace; }
+.answer-key-item .aq-diff { font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 700; }
+.answer-key-item .aq-diff.HOTS { background: #fef3c7; color: #92400e; }
+.answer-key-item .aq-diff.REGULER { background: #e0f2fe; color: #0c4a6e; }
+.btn-add-q {
+  width: 100%;
+  padding: 12px;
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.btn-add-q:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  #page-home, #page-exam, #page-teacher { display: none !important; }
+  #page-result { display: block !important; }
+  .result-actions { display: none !important; }
+  body { background: white; }
+  .result-header { background: #1a56db !important; -webkit-print-color-adjust: exact; }
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-in { animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ===== SAVED INDICATOR ===== */
+.save-indicator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--success);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.save-indicator.show { opacity: 1; }
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .exam-main { margin-left: 0; max-width: 100%; }
+  .result-summary { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .exam-header { flex-wrap: wrap; height: auto; padding: 10px; gap: 8px; }
+  .exam-body { margin-top: 80px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HOME PAGE ============ -->
+<div id="page-home">
+  <div class="home-card fade-in">
+    <div class="home-logo">
+      <div class="home-logo-icon">📚</div>
+      <div class="home-logo-text">
+        <strong>ASAT Digital</strong>
+        <span>Asesmen Berbasis Komputer</span>
+      </div>
+    </div>
+    <div class="home-badge">🏫 SMP Kelas 8 · Kurikulum Merdeka</div>
+    <div class="home-title">Ujicoba ASAT - IPA</div>
+    <div class="home-subtitle">Mata Pelajaran: Ilmu Pengetahuan Alam</div>
+    <div class="exam-meta">
+      <div class="meta-item">
+        <div class="meta-label">📋 Jumlah Soal</div>
+        <div class="meta-value">35 Soal</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">⏱️ Durasi</div>
+        <div class="meta-value">45 Menit</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">⭐ HOTS</div>
+        <div class="meta-value">18 Soal</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">📝 Reguler</div>
+        <div class="meta-value">17 Soal</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Nama Lengkap Siswa <span>*</span></label>
+      <input class="form-input" type="text" id="input-name" placeholder="Masukkan nama lengkap" maxlength="60" autocomplete="off">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Kelas <span>*</span></label>
+        <input class="form-input" type="text" id="input-class" placeholder="cth: 8A" maxlength="10" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label">NIS <span>*</span></label>
+        <input class="form-input" type="text" id="input-nis" placeholder="Nomor Induk Siswa" maxlength="20" autocomplete="off">
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="startExam()">🚀 Mulai Ujian</button>
+    <button class="btn btn-outline" onclick="openTeacherLogin()">🔐 Mode Guru (Akses Cepat)</button>
+    <div class="home-footer">Dilarang keras membuka tab/aplikasi lain selama ujian berlangsung<br>© 2025 ASAT Digital – Ujicoba IPA SMP Kelas 8</div>
+  </div>
+</div>
+
+<!-- ============ PASSWORD MODAL ============ -->
+<div class="overlay" id="pw-modal-overlay">
+  <div class="pw-modal fade-in">
+    <div style="font-size:32px;margin-bottom:8px;">🔐</div>
+    <h3>Akses Mode Guru</h3>
+    <p>Masukkan password untuk mengakses mode guru</p>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" type="password" id="pw-input" placeholder="Masukkan password..." onkeydown="if(event.key==='Enter')checkPassword()">
+      <div class="pw-error" id="pw-error">❌ Password salah. Coba lagi!</div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:8px;">
+      <button class="btn btn-cancel" style="flex:1;padding:10px;" onclick="closeTeacherLogin()">Batal</button>
+      <button class="btn btn-primary" style="flex:1;padding:10px;" onclick="checkPassword()">Masuk</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ EXAM PAGE ============ -->
+<div id="page-exam">
+  <header class="exam-header">
+    <div class="header-brand">
+      <div class="header-brand-icon">📚</div>
+      <div>
+        <div class="header-brand-name">ASAT Digital</div>
+        <div class="header-brand-sub">Ujicoba IPA</div>
+      </div>
+    </div>
+    <div class="header-center">
+      <div class="header-exam-title">Ujicoba ASAT – IPA</div>
+      <div class="header-exam-info">SMP Kelas 8 · Kurikulum Merdeka · 35 Soal</div>
+    </div>
+    <div class="header-right">
+      <div class="timer-box" id="timer-box">
+        <span class="timer-icon">⏱️</span>
+        <span class="timer-display" id="timer">45:00</span>
+      </div>
+      <div class="student-info-chip">
+        <div class="student-avatar" id="student-avatar">S</div>
+        <div class="student-info-text">
+          <strong id="student-name-display">-</strong>
+          <span id="student-class-display">-</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="exam-body">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <div class="sidebar-section-title">Keterangan</div>
+        <div class="sidebar-legend">
+          <div class="legend-item"><div class="legend-dot current"></div><span>Sedang dikerjakan</span></div>
+          <div class="legend-item"><div class="legend-dot answered"></div><span>Sudah dijawab</span></div>
+          <div class="legend-item"><div class="legend-dot unanswered"></div><span>Belum dijawab</span></div>
+          <div class="legend-item"><div class="legend-dot flagged"></div><span>Ditandai ragu</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="sidebar-section-title">Nomor Soal</div>
+        <div class="question-grid" id="question-grid"></div>
+      </div>
+      <div class="sidebar-stats">
+        <div class="stat-row"><span class="stat-label">✅ Terjawab</span><span class="stat-value green" id="stat-answered">0</span></div>
+        <div class="stat-row"><span class="stat-label">⬜ Belum</span><span class="stat-value gray" id="stat-unanswered">35</span></div>
+        <div class="stat-row"><span class="stat-label">🚩 Ditandai</span><span class="stat-value orange" id="stat-flagged">0</span></div>
+      </div>
+      <button class="btn-submit-sidebar" onclick="confirmSubmit()">🏁 Selesai Ujian</button>
+    </aside>
+
+    <!-- Main Area -->
+    <main class="exam-main">
+      <div class="question-card fade-in" id="question-card">
+        <!-- Rendered by JS -->
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Anti-cheat Overlay -->
+<div class="overlay" id="cheat-overlay">
+  <div class="warning-icon">⚠️</div>
+  <h2>JANGAN PINDAH TAB!</h2>
+  <p>Kamu terdeteksi meninggalkan halaman ujian.<br>Kembali ke ujian sekarang!</p>
+  <div id="cheat-countdown">10</div>
+  <p style="font-size:14px;opacity:0.8">Ujian akan otomatis dikumpulkan dalam waktu di atas</p>
+  <button id="cheat-return-btn" onclick="returnFromCheat()">✅ Saya Kembali ke Ujian</button>
+  <div class="violation-badge" id="violation-badge">Pelanggaran: 0/3</div>
+</div>
+
+<!-- Submit Confirm Modal -->
+<div class="overlay" id="modal-overlay">
+  <div class="modal fade-in">
+    <div class="modal-icon">📋</div>
+    <h3 id="modal-title">Kumpulkan Ujian?</h3>
+    <p id="modal-desc">Pastikan kamu sudah memeriksa semua jawaban. Jawaban yang belum dijawab tidak dapat diubah setelah dikumpulkan.</p>
+    <div class="modal-actions">
+      <button class="btn btn-cancel" onclick="closeModal()">Cek Dulu</button>
+      <button class="btn btn-danger-filled" onclick="submitExam()">Kumpulkan ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- Save Indicator -->
+<div class="save-indicator" id="save-indicator">✓ Jawaban tersimpan</div>
+
+<!-- ============ RESULT PAGE ============ -->
+<div id="page-result">
+  <div class="result-header">
+    <div style="font-size:11px;font-weight:600;letter-spacing:1px;opacity:0.8;text-transform:uppercase;margin-bottom:8px;">Ujicoba ASAT – IPA · SMP Kelas 8</div>
+    <h1>📊 Hasil Ujian</h1>
+    <p id="result-student-info">-</p>
+    <div class="result-score-circle">
+      <div class="score-number" id="result-score">0</div>
+      <div class="score-label">Nilai (%)</div>
+    </div>
+  </div>
+  <div class="result-body">
+    <div class="result-actions">
+      <button class="btn-result primary" onclick="window.print()">🖨️ Cetak Hasil</button>
+      <button class="btn-result" onclick="downloadResult()">⬇️ Download PDF</button>
+      <button class="btn-result" onclick="restartExam()">🔄 Ulangi</button>
+    </div>
+    <div class="result-summary" id="result-summary"></div>
+    <div class="suggestion-box" id="suggestion-box"></div>
+    <div class="result-section-title">📝 Detail Setiap Soal</div>
+    <div id="result-detail"></div>
+  </div>
+</div>
+
+<!-- ============ TEACHER PAGE ============ -->
+<div id="page-teacher">
+  <div class="teacher-header">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:20px;">👩‍🏫</span>
+      <div>
+        <h1>Mode Guru – Manajemen Soal</h1>
+        <div style="font-size:11px;color:var(--text-muted);">Ujicoba ASAT IPA · SMP Kelas 8</div>
+      </div>
+    </div>
+    <button class="btn btn-outline" style="width:auto;padding:8px 16px;" onclick="exitTeacherMode()">← Keluar</button>
+  </div>
+  <div class="teacher-body">
+    <div class="teacher-tabs">
+      <button class="tab-btn active" onclick="switchTab('bank',this)">📋 Bank Soal</button>
+      <button class="tab-btn" onclick="switchTab('key',this)">🔑 Kunci Jawaban</button>
+    </div>
+    <div id="tab-bank">
+      <div id="teacher-questions-list"></div>
+      <button class="btn-add-q" onclick="addNewQuestion()">+ Tambah Soal Baru</button>
+    </div>
+    <div id="tab-key" style="display:none;">
+      <div class="teacher-answer-key">
+        <div style="font-size:14px;font-weight:700;margin-bottom:14px;">🔑 Kunci Jawaban Semua Soal</div>
+        <div class="answer-key-grid" id="answer-key-grid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==========================================
+//  DATA SOAL (35 Soal IPA Kelas 8)
+// ==========================================
+let questions = [
+  // === GELOMBANG DAN CAHAYA ===
+  {id:1,type:"PG",intro:"Perhatikan fenomena berikut! Ketika kamu berada di pantai, kamu bisa melihat ombak laut bergerak ke tepi pantai. Gelombang juga ada di sekitar kita dalam berbagai bentuk.",content:"Seorang siswa berdiri di tepi kolam renang dan mengamati gelombang air yang merambat. Ia mencatat bahwa panjang gelombang adalah 2 meter dan frekuensinya adalah 3 Hz. Berapa cepat rambat gelombang tersebut?",image:null,options:["2 m/s","3 m/s","5 m/s","6 m/s"],answer:"D",difficulty:"HOTS",explanation:"Cepat rambat gelombang (v) = panjang gelombang (λ) × frekuensi (f) = 2 m × 3 Hz = 6 m/s. Rumus ini berlaku untuk semua jenis gelombang mekanik."},
+  {id:2,type:"PG",intro:null,content:"Cahaya matahari yang masuk melalui celah kecil di jendela tampak seperti berkas cahaya yang lurus. Sifat cahaya yang ditunjukkan pada fenomena ini adalah...",image:null,options:["Cahaya dapat dibiaskan","Cahaya merambat lurus","Cahaya dapat dipantulkan","Cahaya dapat diuraikan"],answer:"B",difficulty:"REGULER",explanation:"Berkas cahaya dari celah sempit menunjukkan cahaya merambat lurus (rectilinear propagation). Inilah mengapa bayangan benda memiliki tepi yang tajam."},
+  {id:3,type:"KOMPLEKS",intro:"Gelombang suara dan gelombang cahaya adalah dua jenis gelombang yang berbeda. Pelajari perbedaannya dengan cermat!",content:"Perhatikan pernyataan-pernyataan berikut tentang gelombang suara. Pilihlah SEMUA pernyataan yang BENAR! (Pilih lebih dari satu)",image:null,options:["Gelombang suara termasuk gelombang longitudinal","Gelombang suara dapat merambat di ruang hampa","Gelombang suara memerlukan medium untuk merambat","Cepat rambat suara di udara sekitar 340 m/s"],answer:"ACD",difficulty:"HOTS",explanation:"Gelombang suara adalah gelombang longitudinal yang memerlukan medium (zat) untuk merambat. Di ruang hampa tidak ada suara karena tidak ada medium. Cepat rambat suara di udara ±340 m/s."},
+  {id:4,type:"PG",intro:null,content:"Dokter menggunakan USG (Ultrasonografi) untuk melihat kondisi janin dalam kandungan. Teknologi USG memanfaatkan gelombang...",image:null,options:["Inframerah","Ultraviolet","Ultrasonik","Radioaktif"],answer:"C",difficulty:"REGULER",explanation:"USG menggunakan gelombang ultrasonik (frekuensi di atas 20.000 Hz). Gelombang ini dipantulkan oleh organ tubuh dan diproses menjadi gambar. Aman digunakan karena bukan radiasi elektromagnetik berbahaya."},
+  {id:5,type:"BS",intro:"Cermat dan teliti dalam memahami sifat-sifat gelombang sangat penting dalam fisika!",content:"Tentukan apakah pernyataan berikut ini BENAR atau SALAH:\n\"Pelangi terjadi karena cahaya matahari mengalami pembiasan dan dispersi saat melewati tetes-tetes air hujan di atmosfer.\"",image:null,options:["BENAR","SALAH"],answer:"BENAR",difficulty:"REGULER",explanation:"BENAR. Pelangi terjadi melalui 3 proses: pembiasan saat cahaya masuk tetes air, pemantulan di dalam tetes air, dan pembiasan kembali saat keluar. Dispersi memisahkan cahaya putih menjadi 7 warna."},
+  {id:6,type:"PG",intro:"Cermin dan lensa banyak digunakan dalam kehidupan sehari-hari maupun dalam teknologi canggih.",content:"Sebuah kaca mata dengan lensa cekung digunakan untuk membantu penderita rabun jauh (miopi). Sifat bayangan yang dibentuk lensa cekung pada kacamata tersebut adalah...",image:null,options:["Maya, tegak, diperbesar","Nyata, terbalik, diperkecil","Maya, tegak, diperkecil","Nyata, tegak, diperbesar"],answer:"C",difficulty:"HOTS",explanation:"Lensa cekung (divergen) selalu membentuk bayangan maya (tidak bisa ditangkap layar), tegak (tidak terbalik), dan diperkecil. Bayangan ini membantu mata miopi agar bisa melihat dengan jelas."},
+  {id:7,type:"JODOH",intro:"Teknologi optik banyak menggunakan prinsip pemantulan dan pembiasan cahaya. Mari mencocokkan alat dengan prinsip kerjanya!",content:"Jodohkan alat optik berikut dengan prinsip utama yang digunakannya:",image:null,options:["Pembiasan cahaya","Pemantulan total","Pemantulan cermin","Dispersi cahaya"],answer:["A","B","C","D"],difficulty:"REGULER",matchLeft:["Lensa kamera","Serat optik","Teleskop reflektor","Prisma"],explanation:"Lensa kamera: pembiasan. Serat optik: pemantulan total internal. Teleskop reflektor: pemantulan cermin cekung. Prisma: dispersi (memisahkan warna cahaya)."},
+  {id:8,type:"PG",intro:null,content:"Perhatikan gambar ilustrasi berikut! Sebuah tongkat lurus tampak bengkok ketika sebagian dicelupkan ke dalam air. Peristiwa ini merupakan contoh dari...",image:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Light_refraction.svg/320px-Light_refraction.svg.png",options:["Pemantulan cahaya","Pembiasan cahaya","Dispersi cahaya","Difraksi cahaya"],answer:"B",difficulty:"REGULER",explanation:"Tongkat tampak bengkok karena pembiasan (refraksi) cahaya. Cahaya berubah arah ketika berpindah dari medium yang satu (udara) ke medium lain (air) yang berbeda kerapatan optiknya."},
+  {id:9,type:"PG",intro:"Suara memiliki sifat-sifat unik yang dimanfaatkan dalam berbagai teknologi modern.",content:"Teknologi SONAR pada kapal selam memanfaatkan sifat gelombang suara untuk mendeteksi kedalaman laut. Prinsip yang digunakan SONAR adalah...",image:null,options:["Difraksi gelombang suara","Pemantulan gelombang suara (gema)","Pembiasan gelombang suara","Interferensi gelombang suara"],answer:"B",difficulty:"HOTS",explanation:"SONAR (Sound Navigation and Ranging) memanfaatkan pemantulan (gema/echo) gelombang suara. Suara dipancarkan, kemudian waktu pantulannya diukur untuk menghitung jarak/kedalaman menggunakan rumus: d = v×t/2."},
+  {id:10,type:"ISIAN",intro:"Ingat kembali rumus-rumus dalam fisika gelombang!",content:"Sebuah sumber bunyi menghasilkan gelombang dengan frekuensi 440 Hz. Jika cepat rambat bunyi di udara adalah 340 m/s, maka panjang gelombang bunyi tersebut adalah _______ meter (tuliskan angkanya).",image:null,options:[],answer:"0.77",difficulty:"HOTS",explanation:"λ = v/f = 340/440 ≈ 0,77 meter. Ini adalah frekuensi nada A4 yang sering digunakan sebagai standar tuning alat musik."},
+
+  // === TEKANAN ZAT ===
+  {id:11,type:"PG",intro:"Tekanan adalah salah satu konsep penting dalam IPA. Tekanan terjadi ketika ada gaya yang bekerja pada suatu permukaan.",content:"Seorang siswi bermassa 40 kg berdiri di atas papan kayu. Jika luas telapak kakinya adalah 200 cm², tekanan yang diberikan pada papan adalah... (g = 10 m/s²)",image:null,options:["2.000 Pa","4.000 Pa","20.000 Pa","40.000 Pa"],answer:"C",difficulty:"HOTS",explanation:"P = F/A = (m×g)/A = (40×10)/(200×10⁻⁴) = 400/0,02 = 20.000 Pa. Ingat: 1 cm² = 10⁻⁴ m². Semakin kecil luas alas, semakin besar tekanan."},
+  {id:12,type:"PG",intro:null,content:"Mengapa punting jarum lebih mudah menusuk kain dibandingkan bagian ujung tumpulnya, meskipun gaya yang diberikan sama?",image:null,options:["Karena jarum lebih berat","Karena luas permukaan ujung jarum lebih kecil sehingga tekanannya lebih besar","Karena jarum terbuat dari logam yang keras","Karena gaya jarum lebih kuat dari ujung tumpul"],answer:"B",difficulty:"REGULER",explanation:"P = F/A. Jika gaya (F) sama namun luas permukaan (A) lebih kecil, maka tekanan (P) lebih besar. Ujung runcing jarum memiliki luas sangat kecil sehingga tekanannya sangat besar."},
+  {id:13,type:"PG",intro:"Hukum Pascal adalah salah satu prinsip penting tentang tekanan zat cair yang diaplikasikan dalam banyak teknologi.",content:"Mesin hidrolik di bengkel motor dapat mengangkat kendaraan berat dengan gaya yang kecil. Prinsip fisika yang mendasari cara kerja alat ini adalah...",image:null,options:["Hukum Archimedes","Hukum Pascal","Hukum Boyle","Hukum Newton"],answer:"B",difficulty:"REGULER",explanation:"Hukum Pascal menyatakan tekanan yang diberikan pada fluida tertutup diteruskan sama besar ke segala arah. Dengan memperbesar luas penampang, gaya angkat yang dihasilkan jauh lebih besar dari gaya yang diberikan."},
+  {id:14,type:"KOMPLEKS",intro:"Tekanan hidrostatis berkaitan dengan kedalaman zat cair.",content:"Manakah pernyataan yang BENAR tentang tekanan hidrostatis? (Pilih lebih dari satu jawaban)",image:null,options:["Tekanan hidrostatis berbanding lurus dengan kedalaman","Tekanan hidrostatis tidak dipengaruhi bentuk wadah","Tekanan hidrostatis dipengaruhi massa jenis zat cair","Tekanan hidrostatis sama di semua arah pada kedalaman yang sama"],answer:"ABCD",difficulty:"HOTS",explanation:"Semua pernyataan benar. Ph = ρ×g×h. Tekanan hidrostatis bergantung pada kedalaman (h) dan massa jenis (ρ), tidak bergantung bentuk wadah, dan bekerja ke segala arah pada kedalaman yang sama."},
+  {id:15,type:"PG",intro:null,content:"Kapal selam dapat menyelam dan mengapung kembali ke permukaan dengan mengatur... ",image:null,options:["Kecepatan baling-baling","Volume udara dalam tangki ballast","Suhu mesin kapal","Kekuatan dinding kapal"],answer:"B",difficulty:"REGULER",explanation:"Kapal selam memiliki tangki ballast. Untuk menyelam, tangki diisi air sehingga berat kapal bertambah dan kapal tenggelam. Untuk naik, air dipompa keluar dan diganti udara sehingga kapal menjadi lebih ringan dan mengapung."},
+  {id:16,type:"BS",intro:"Benda yang dimasukkan ke dalam zat cair mengalami gaya apung.",content:"Apakah pernyataan ini BENAR atau SALAH?\n\"Gaya apung pada benda yang tenggelam di dalam air sama dengan berat air yang dipindahkan oleh benda tersebut.\"",image:null,options:["BENAR","SALAH"],answer:"BENAR",difficulty:"REGULER",explanation:"BENAR. Ini adalah bunyi Hukum Archimedes. Gaya apung (Fa) = berat fluida yang dipindahkan = ρ_fluida × V_benda × g."},
+  {id:17,type:"PG",intro:"Teknologi penerapan tekanan sangat bermanfaat dalam kehidupan manusia.",content:"Ban sepeda yang kempis terasa berat saat dikayuh. Hal ini terjadi karena...",image:null,options:["Tekanan udara dalam ban rendah sehingga gesekan ban dengan jalan meningkat","Massa ban bertambah ketika kempis","Roda sepeda menjadi tidak seimbang","Gaya gravitasi bertambah besar"],answer:"A",difficulty:"HOTS",explanation:"Ban kempis menyebabkan lebih banyak permukaan ban bersentuhan dengan jalan (luas kontak bertambah). Hal ini meningkatkan gesekan sehingga lebih susah dikayuh. Selain itu, bantalan udara yang meredam benturan berkurang."},
+  {id:18,type:"PG",intro:null,content:"Seorang anak hendak mengukur tekanan udara di sekitarnya menggunakan alat barometer. Satuan yang biasa digunakan untuk menyatakan tekanan udara pada barometer adalah...",image:null,options:["Newton","Joule","Pascal (atau milibar)","Watt"],answer:"C",difficulty:"REGULER",explanation:"Tekanan diukur dalam satuan Pascal (Pa) dalam SI. Untuk tekanan atmosfer sering digunakan satuan milibar (mb) atau atm. 1 atm = 101.325 Pa ≈ 1013 mb."},
+  {id:19,type:"PG",intro:"Tekanan pada gas memiliki hubungan dengan volume dan suhu.",content:"Sebuah pompa sepeda mampu memampatkan udara masuk ke dalam ban. Ketika udara dipampatkan (volumenya dikurangi) pada suhu tetap, apa yang terjadi dengan tekanan udara tersebut?",image:null,options:["Tekanan berkurang","Tekanan tetap sama","Tekanan meningkat","Tekanan menjadi nol"],answer:"C",difficulty:"HOTS",explanation:"Sesuai Hukum Boyle: pada suhu tetap, P×V = konstan. Jika volume (V) diperkecil, maka tekanan (P) akan meningkat. Inilah yang terjadi saat memompa ban: udara dipadatkan sehingga tekanannya naik."},
+  {id:20,type:"ISIAN",intro:null,content:"Sebuah benda memiliki berat 50 N dan tenggelam seluruhnya di dalam air. Jika volume benda adalah 2 liter (0,002 m³) dan massa jenis air 1000 kg/m³, maka gaya apung yang dialami benda adalah _______ N (g = 10 m/s²).",image:null,options:[],answer:"20",difficulty:"HOTS",explanation:"Fa = ρ_air × V × g = 1000 × 0,002 × 10 = 20 N. Karena berat benda (50 N) > gaya apung (20 N), benda tenggelam."},
+
+  // === SISTEM PERNAPASAN ===
+  {id:21,type:"PG",intro:"Sistem pernapasan adalah sistem organ yang memungkinkan kita menghirup oksigen dan mengeluarkan karbon dioksida.",content:"Urutan organ pernapasan manusia yang benar dari luar ke dalam adalah...",image:null,options:["Hidung – Tenggorokan – Bronkus – Trakea – Bronkiolus – Alveolus","Hidung – Faring – Laring – Trakea – Bronkus – Bronkiolus – Alveolus","Mulut – Laring – Bronkus – Trakea – Alveolus","Hidung – Trakea – Laring – Faring – Bronkus – Alveolus"],answer:"B",difficulty:"REGULER",explanation:"Urutan yang benar: Hidung → Faring (tenggorokan atas) → Laring (kotak suara) → Trakea (batang tenggorokan) → Bronkus → Bronkiolus → Alveolus (gelembung paru)."},
+  {id:22,type:"PG",intro:null,content:"Di dalam alveolus terjadi pertukaran gas antara udara dan darah. Gas yang masuk dari alveolus ke darah dan gas yang keluar dari darah ke alveolus secara berurutan adalah...",image:null,options:["CO₂ masuk ke darah, O₂ keluar dari darah","O₂ masuk ke darah, CO₂ keluar dari darah","N₂ masuk ke darah, H₂O keluar dari darah","O₂ dan CO₂ keduanya masuk ke darah"],answer:"B",difficulty:"REGULER",explanation:"Di alveolus: O₂ dari udara berpindah masuk ke darah (difusi karena konsentrasi O₂ udara > darah), sedangkan CO₂ sisa metabolisme keluar dari darah ke udara untuk dibuang."},
+  {id:23,type:"KOMPLEKS",intro:"Penyakit pada sistem pernapasan bisa disebabkan berbagai faktor.",content:"Perhatikan kondisi-kondisi berikut. Pilihlah yang termasuk faktor risiko penyakit pada sistem pernapasan! (Pilih lebih dari satu)",image:null,options:["Merokok aktif maupun pasif","Rajin berolahraga di udara bersih","Paparan asap dan debu dalam jangka panjang","Polusi udara dari kendaraan bermotor"],answer:"ACD",difficulty:"HOTS",explanation:"Merokok, paparan asap/debu, dan polusi udara merusak jaringan paru-paru dan meningkatkan risiko penyakit seperti asma, bronkitis, dan kanker paru. Olahraga di udara bersih justru menyehatkan paru-paru."},
+  {id:24,type:"PG",intro:"Diafragma berperan penting dalam proses pernapasan.",content:"Ketika kita menarik napas (inspirasi), apa yang terjadi pada diafragma dan rongga dada?",image:null,options:["Diafragma naik, rongga dada menyempit","Diafragma turun/mendatar, rongga dada membesar","Diafragma tetap, paru-paru mengembang sendiri","Diafragma naik, tekanan udara dalam paru meningkat"],answer:"B",difficulty:"HOTS",explanation:"Saat inspirasi: otot diafragma berkontraksi → diafragma turun dan mendatar → rongga dada membesar → tekanan udara dalam paru turun → udara luar masuk (tekanan luar > dalam)."},
+  {id:25,type:"BS",intro:null,content:"Apakah pernyataan ini BENAR atau SALAH?\n\"Asma adalah penyakit sistem pernapasan yang ditandai dengan penyempitan saluran bronkus sehingga penderita kesulitan bernapas, terutama saat mengeluarkan napas.\"",image:null,options:["BENAR","SALAH"],answer:"BENAR",difficulty:"REGULER",explanation:"BENAR. Asma terjadi karena bronkus mengalami peradangan dan penyempitan akibat berbagai pemicu (alergen, debu, dingin). Penderita merasakan sesak napas terutama saat ekspirasi karena udara sulit keluar dari paru-paru yang menyempit."},
+
+  // === SISTEM EKSKRESI ===
+  {id:26,type:"PG",intro:"Sistem ekskresi adalah sistem yang membuang sisa-sisa metabolisme dari tubuh agar tidak menumpuk dan meracuni tubuh.",content:"Organ ekskresi manusia beserta zat yang dikeluarkannya yang tepat adalah...",image:null,options:["Ginjal mengeluarkan empedu","Hati mengeluarkan urine","Paru-paru mengeluarkan CO₂ dan uap air","Kulit mengeluarkan oksigen"],answer:"C",difficulty:"REGULER",explanation:"Paru-paru mengeluarkan CO₂ dan H₂O (uap air) sisa respirasi seluler. Ginjal → urine. Kulit → keringat. Hati → cairan empedu (bukan organ ekskresi utama tapi mengekskresikan zat melalui empedu)."},
+  {id:27,type:"PG",intro:"Ginjal adalah organ ekskresi utama yang bekerja keras setiap hari.",content:"Proses pembentukan urine di ginjal terjadi melalui tiga tahap berurutan. Urutan yang benar adalah...",image:null,options:["Reabsorpsi – Filtrasi – Augmentasi","Augmentasi – Reabsorpsi – Filtrasi","Filtrasi – Reabsorpsi – Augmentasi","Filtrasi – Augmentasi – Reabsorpsi"],answer:"C",difficulty:"REGULER",explanation:"Tahap pembentukan urine: 1) Filtrasi (penyaringan darah di glomerulus) → 2) Reabsorpsi (penyerapan kembali zat yang masih berguna di tubulus) → 3) Augmentasi (penambahan zat sisa yang tidak diperlukan)."},
+  {id:28,type:"PG",intro:"Kulit tidak hanya berfungsi sebagai pelindung tubuh, tetapi juga sebagai organ ekskresi.",content:"Saat berolahraga di cuaca panas, tubuh kita banyak mengeluarkan keringat. Fungsi berkeringat bagi tubuh adalah...",image:null,options:["Menambah berat badan","Mengatur suhu tubuh dan membuang sisa metabolisme","Meningkatkan tekanan darah","Mempercepat detak jantung"],answer:"B",difficulty:"HOTS",explanation:"Keringat mengandung air, garam mineral, dan sedikit urea (sisa metabolisme). Saat keringat menguap dari kulit, panas tubuh ikut terbawa sehingga suhu tubuh turun. Ini adalah mekanisme termoregulasi."},
+  {id:29,type:"KOMPLEKS",intro:"Gangguan pada sistem ekskresi perlu kita waspadai.",content:"Berikut ini adalah ciri-ciri dari seseorang yang menderita diabetes melitus (kencing manis). Pilihlah yang BENAR! (Pilih lebih dari satu)",image:null,options:["Urine mengandung glukosa","Sering merasa haus dan sering buang air kecil","Kadar gula darah di bawah normal","Luka yang sulit sembuh"],answer:"ABD",difficulty:"HOTS",explanation:"Penderita diabetes: urine mengandung glukosa karena ginjal tidak dapat menyerap semua glukosa berlebih, sering haus dan buang air kecil akibat kadar gula tinggi, luka sulit sembuh karena gangguan sirkulasi. Kadar gula darah justru TINGGI (bukan rendah)."},
+  {id:30,type:"BS",intro:"Hati memiliki fungsi yang sangat beragam dalam tubuh.",content:"Apakah pernyataan ini BENAR atau SALAH?\n\"Hati berfungsi menguraikan sel darah merah yang sudah rusak dan menghasilkan bilirubin yang memberi warna kuning pada empedu dan urine.\"",image:null,options:["BENAR","SALAH"],answer:"BENAR",difficulty:"REGULER",explanation:"BENAR. Hati memang memiliki fungsi ini. Sel darah merah yang tua dihancurkan, hemoglobinnya diurai menjadi bilirubin. Bilirubin keluar melalui empedu dan sebagian diserap usus lalu dikeluarkan bersama urine memberikan warna kuning."},
+
+  // === SOAL HOTS GABUNGAN / ANALISIS ===
+  {id:31,type:"PG",intro:"Bacalah wacana berikut dengan seksama!\n\nRini adalah seorang atlet renang. Setiap hari ia berlatih di kolam renang olimpik sedalam 2 meter. Suatu hari Rini merasakan telinganya sakit saat menyelam ke dasar kolam.",content:"Berdasarkan wacana, mengapa telinga Rini terasa sakit saat menyelam ke dasar kolam renang?",image:null,options:["Karena air masuk ke dalam telinga","Karena tekanan hidrostatis air bertambah seiring kedalaman","Karena suhu air di dasar lebih dingin","Karena gerakan renang terlalu cepat"],answer:"B",difficulty:"HOTS",explanation:"Tekanan hidrostatis (Ph = ρgh) meningkat seiring bertambahnya kedalaman. Di dasar kolam, tekanan air yang menekan gendang telinga lebih besar, menyebabkan rasa sakit atau tidak nyaman. Ini normal dan dialami oleh penyelam."},
+  {id:32,type:"PG",intro:"Perhatikan situasi berikut ini!",content:"Dani melihat kilat terlebih dahulu sebelum mendengar suara guntur. Jarak Dani dengan tempat kejadian petir adalah 1.020 meter. Berapa selang waktu antara Dani melihat kilat dan mendengar guntur? (cepat rambat suara = 340 m/s, cahaya sangat cepat diabaikan)",image:null,options:["1 detik","2 detik","3 detik","4 detik"],answer:"C",difficulty:"HOTS",explanation:"t = s/v = 1.020/340 = 3 detik. Cahaya hampir seketika sampai ke mata (diabaikan), sedangkan suara memerlukan waktu untuk merambat. Rumus jarak petir ini berguna untuk keselamatan."},
+  {id:33,type:"PG",intro:"Ini adalah soal gabungan yang memerlukan pemikiran analitis!",content:"Seorang dokter menyarankan pasiennya yang memiliki batu ginjal untuk banyak minum air putih. Mengapa minum banyak air dapat membantu penderita batu ginjal?",image:null,options:["Agar ginjal tidak perlu bekerja","Agar volume urine bertambah sehingga dapat membantu melarutkan dan mengeluarkan mineral yang membentuk batu","Agar tekanan darah pasien menurun","Agar pasien tidak merasa lapar"],answer:"B",difficulty:"HOTS",explanation:"Batu ginjal terbentuk dari mineral (kalsium, oksalat) yang mengkristal dalam urine yang terlalu pekat. Dengan banyak minum air, urine lebih encer dan mineral tidak mudah mengkristal. Volume urine yang lebih besar juga membantu mendorong batu kecil keluar."},
+  {id:34,type:"KOMPLEKS",intro:"Baca teks di bawah ini!\n\nSeorang petani menggunakan traktor dengan ban besar dan lebar untuk membajak sawah. Di sisi lain, sepatu hak tinggi memiliki alas yang sangat kecil.",content:"Berdasarkan prinsip tekanan (P = F/A), manakah pernyataan yang TEPAT? (Pilih lebih dari satu)",image:null,options:["Ban traktor yang lebar membuat tekanan ke tanah lebih kecil sehingga tidak amblas","Sepatu hak tinggi memberikan tekanan besar ke lantai karena luas alasnya kecil","Traktor dengan ban sempit akan lebih mudah digunakan di sawah berlumpur","Semakin lebar ban, semakin besar gaya yang diberikan traktor"],answer:"AB",difficulty:"HOTS",explanation:"A: Benar, ban lebar → luas besar → tekanan kecil → tidak amblas. B: Benar, hak tinggi → luas kecil → tekanan besar. C: Salah, ban sempit di sawah berlumpur justru mudah amblas. D: Salah, lebar ban tidak mempengaruhi gaya (berat traktor tetap sama)."},
+  {id:35,type:"PG",intro:"Soal terakhir! Uji kemampuan analisismu!",content:"Andi baru saja selesai berolahraga dan napasnya terengah-engah. Otot-ototnya membutuhkan lebih banyak oksigen. Secara berurutan, apa yang terjadi dalam tubuh Andi agar kebutuhan oksigen terpenuhi?",image:null,options:["Napas melambat → O₂ berkurang → darah membawa CO₂ → tubuh rileks","Frekuensi napas meningkat → O₂ lebih banyak masuk ke alveolus → O₂ diserap darah → diedarkan ke otot","Ginjal menyaring lebih banyak darah → O₂ dikeluarkan melalui urine","Diafragma melemah → paru-paru mengempis → O₂ berkurang"],answer:"B",difficulty:"HOTS",explanation:"Saat berolahraga, otot membutuhkan lebih banyak O₂. Otak mendeteksi peningkatan CO₂ dan memerintahkan peningkatan frekuensi napas. Lebih banyak udara masuk → lebih banyak O₂ di alveolus → difusi ke darah meningkat → darah mengantarkan O₂ ke otot."}
+];
+
+// ==========================================
+//  STATE
+// ==========================================
+let studentInfo = { name: '', kelas: '', nis: '' };
+let answers = {}; // {qId: answer}
+let flags = {};   // {qId: bool}
+let currentQ = 0;
+let timerInterval = null;
+let timeLeft = 45 * 60;
+let violations = 0;
+let cheatCountdown = 10;
+let cheatInterval = null;
+let examActive = false;
+let submitted = false;
+
+// ==========================================
+//  HOME
+// ==========================================
+function startExam() {
+  const name = document.getElementById('input-name').value.trim();
+  const kelas = document.getElementById('input-class').value.trim();
+  const nis = document.getElementById('input-nis').value.trim();
+  if (!name || !kelas || !nis) {
+    alert('⚠️ Mohon isi Nama, Kelas, dan NIS terlebih dahulu!');
+    return;
+  }
+  studentInfo = { name, kelas, nis };
+  document.getElementById('student-name-display').textContent = name.length > 16 ? name.substring(0,16)+'...' : name;
+  document.getElementById('student-class-display').textContent = `Kelas ${kelas} | NIS: ${nis}`;
+  document.getElementById('student-avatar').textContent = name.charAt(0).toUpperCase();
+  showPage('exam');
+  buildQuestionGrid();
+  renderQuestion();
+  startTimer();
+  initAntiCheat();
+  examActive = true;
+}
+
+// ==========================================
+//  PAGE NAVIGATION
+// ==========================================
+function showPage(page) {
+  ['home','exam','result','teacher'].forEach(p => {
+    const el = document.getElementById(`page-${p}`);
+    el.style.display = 'none';
+    if (p === 'exam') el.style.flexDirection = '';
+  });
+  const target = document.getElementById(`page-${page}`);
+  if (page === 'exam') {
+    target.style.display = 'flex';
+    target.style.flexDirection = 'column';
+  } else {
+    target.style.display = 'block';
+  }
+}
+
+// ==========================================
+//  BUILD SIDEBAR GRID
+// ==========================================
+function buildQuestionGrid() {
+  const grid = document.getElementById('question-grid');
+  grid.innerHTML = '';
+  questions.forEach((q, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'q-btn' + (idx === 0 ? ' current' : '');
+    btn.textContent = idx + 1;
+    btn.id = `qbtn-${idx}`;
+    btn.onclick = () => goToQuestion(idx);
+    grid.appendChild(btn);
+  });
+}
+
+function updateGrid() {
+  questions.forEach((q, idx) => {
+    const btn = document.getElementById(`qbtn-${idx}`);
+    if (!btn) return;
+    btn.className = 'q-btn';
+    if (idx === currentQ) btn.classList.add('current');
+    else if (flags[q.id]) btn.classList.add('flagged');
+    else if (answers[q.id] !== undefined && answers[q.id] !== '') btn.classList.add('answered');
+  });
+  updateStats();
+}
+
+function updateStats() {
+  let answered = 0, flagged = 0;
+  questions.forEach(q => {
+    if (answers[q.id] !== undefined && answers[q.id] !== '') answered++;
+    if (flags[q.id]) flagged++;
+  });
+  document.getElementById('stat-answered').textContent = answered;
+  document.getElementById('stat-unanswered').textContent = questions.length - answered;
+  document.getElementById('stat-flagged').textContent = flagged;
+}
+
+// ==========================================
+//  RENDER QUESTION
+// ==========================================
+function renderQuestion() {
+  const q = questions[currentQ];
+  const card = document.getElementById('question-card');
+  card.className = 'question-card fade-in';
+  
+  let html = `
+    <div class="q-header">
+      <div class="q-number">${currentQ + 1}</div>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;color:var(--text);">Soal ${currentQ + 1} dari ${questions.length}</div>
+        <div style="font-size:11px;color:var(--text-muted);">${getTypeName(q.type)}</div>
+      </div>
+      <span class="q-type-badge ${q.difficulty}">${q.difficulty}</span>
+    </div>`;
+  
+  if (q.intro) {
+    html += `<div class="q-intro">📖 ${q.intro}</div>`;
+  }
+  
+  if (q.image) {
+    html += `<img src="${q.image}" class="q-image" alt="Gambar soal ${currentQ+1}" onerror="this.parentNode.innerHTML+='<div class=q-image-placeholder>🖼️ Gambar tidak dapat ditampilkan</div>';this.remove()">`;
+  }
+  
+  html += `<div class="q-content">${q.content.replace(/\n/g,'<br>')}</div>`;
+  html += `<div class="options-list" id="options-container">`;
+  
+  if (q.type === 'PG') {
+    const letters = ['A','B','C','D'];
+    q.options.forEach((opt, i) => {
+      const sel = answers[q.id] === letters[i] ? ' selected' : '';
+      html += `<div class="option-item${sel}" onclick="selectAnswer(${q.id},'${letters[i]}',this)">
+        <span class="option-letter">${letters[i]}</span>
+        <span class="option-text">${opt}</span>
+      </div>`;
+    });
+  } else if (q.type === 'KOMPLEKS') {
+    const letters = ['A','B','C','D'];
+    const selArr = answers[q.id] ? answers[q.id].split('') : [];
+    q.options.forEach((opt, i) => {
+      const sel = selArr.includes(letters[i]) ? ' selected' : '';
+      html += `<div class="option-item checkbox-style${sel}" onclick="toggleComplex(${q.id},'${letters[i]}',this)">
+        <span class="option-letter" style="border-radius:4px;">${sel ? '✓' : letters[i]}</span>
+        <span class="option-text">${opt}</span>
+      </div>`;
+    });
+    html += `<div style="font-size:11px;color:var(--text-muted);margin-top:6px;">💡 Pilih semua jawaban yang benar (bisa lebih dari satu)</div>`;
+  } else if (q.type === 'BS') {
+    html += `<div class="tf-options">
+      <div class="tf-option ${answers[q.id]==='BENAR'?'selected':''}" onclick="selectAnswer(${q.id},'BENAR',this)">✅ BENAR</div>
+      <div class="tf-option ${answers[q.id]==='SALAH'?'selected':''}" onclick="selectAnswer(${q.id},'SALAH',this)">❌ SALAH</div>
+    </div>`;
+  } else if (q.type === 'JODOH') {
+    const rightOptions = q.options;
+    q.matchLeft.forEach((left, i) => {
+      const saved = answers[q.id] ? (answers[q.id].split(',')[i] || '') : '';
+      html += `<div class="matching-row">
+        <div class="matching-left">${left}</div>
+        <div class="matching-arrow">→</div>
+        <select class="matching-select" onchange="updateMatching(${q.id},${i},this.value)">
+          <option value="">-- Pilih --</option>
+          ${rightOptions.map((r,ri) => `<option value="${['A','B','C','D'][ri]}" ${saved===['A','B','C','D'][ri]?'selected':''}>${['A','B','C','D'][ri]}. ${r}</option>`).join('')}
+        </select>
+      </div>`;
+    });
+  } else if (q.type === 'ISIAN') {
+    html += `<input type="text" class="fill-blank-input" placeholder="Ketik jawabanmu di sini..." value="${answers[q.id]||''}" oninput="saveIsian(${q.id},this.value)">`;
+  }
+  
+  html += `</div>`;
+  
+  // Footer
+  const isFlagged = flags[q.id] ? ' active' : '';
+  html += `<div class="q-footer">
+    <button class="btn-flag${isFlagged}" id="flag-btn" onclick="toggleFlag(${q.id})">
+      🚩 ${flags[q.id] ? 'Hapus Tanda' : 'Tandai Ragu'}
+    </button>
+    <div class="nav-buttons">
+      <button class="btn-nav" onclick="prevQuestion()" ${currentQ===0?'disabled':''}>← Sebelumnya</button>
+      ${currentQ < questions.length-1 
+        ? `<button class="btn-nav primary" onclick="nextQuestion()">Selanjutnya →</button>`
+        : `<button class="btn-nav primary" onclick="confirmSubmit()">🏁 Selesai</button>`
+      }
+    </div>
+  </div>`;
+  
+  card.innerHTML = html;
+  updateGrid();
+}
+
+function getTypeName(type) {
+  const names = {PG:'Pilihan Ganda',KOMPLEKS:'Pilihan Ganda Kompleks',BS:'Benar / Salah',JODOH:'Menjodohkan',ISIAN:'Melengkapi (Isian)'};
+  return names[type] || type;
+}
+
+// ==========================================
+//  ANSWER HANDLERS
+// ==========================================
+function selectAnswer(qId, val, el) {
+  answers[qId] = val;
+  // Update UI
+  el.closest('.options-list').querySelectorAll('.option-item, .tf-option').forEach(item => {
+    item.classList.remove('selected');
+    const letter = item.querySelector('.option-letter');
+    if (letter) { letter.style.background=''; letter.style.color=''; letter.style.borderColor=''; }
+  });
+  el.classList.add('selected');
+  const letter = el.querySelector('.option-letter');
+  if (letter) { letter.style.background='var(--primary)'; letter.style.color='white'; letter.style.borderColor='var(--primary)'; }
+  saveAndIndicator(qId);
+  updateGrid();
+}
+
+function toggleComplex(qId, letter, el) {
+  let current = answers[qId] ? answers[qId].split('') : [];
+  if (current.includes(letter)) {
+    current = current.filter(l => l !== letter);
+    el.classList.remove('selected');
+    const letterEl = el.querySelector('.option-letter');
+    if (letterEl) { letterEl.textContent = letter; letterEl.style.background=''; letterEl.style.color=''; }
+  } else {
+    current.push(letter);
+    current.sort();
+    el.classList.add('selected');
+    const letterEl = el.querySelector('.option-letter');
+    if (letterEl) { letterEl.textContent='✓'; letterEl.style.background='var(--primary)'; letterEl.style.color='white'; }
+  }
+  answers[qId] = current.join('');
+  saveAndIndicator(qId);
+  updateGrid();
+}
+
+function updateMatching(qId, idx, val) {
+  if (!answers[qId]) {
+    const q = questions.find(q=>q.id===qId);
+    answers[qId] = new Array(q.matchLeft.length).fill('').join(',');
+  }
+  let parts = answers[qId].split(',');
+  const q = questions.find(q=>q.id===qId);
+  while (parts.length < q.matchLeft.length) parts.push('');
+  parts[idx] = val;
+  answers[qId] = parts.join(',');
+  saveAndIndicator(qId);
+  updateGrid();
+}
+
+function saveIsian(qId, val) {
+  answers[qId] = val;
+  saveAndIndicator(qId);
+  updateGrid();
+}
+
+function saveAndIndicator(qId) {
+  const ind = document.getElementById('save-indicator');
+  ind.classList.add('show');
+  setTimeout(() => ind.classList.remove('show'), 1500);
+  // Auto save to localStorage as backup
+  try {
+    localStorage.setItem('asat_answers', JSON.stringify({answers, flags, studentInfo, timestamp: new Date().toISOString()}));
+  } catch(e) {}
+}
+
+// ==========================================
+//  FLAG
+// ==========================================
+function toggleFlag(qId) {
+  flags[qId] = !flags[qId];
+  const btn = document.getElementById('flag-btn');
+  if (btn) {
+    btn.classList.toggle('active', flags[qId]);
+    btn.innerHTML = `🚩 ${flags[qId] ? 'Hapus Tanda' : 'Tandai Ragu'}`;
+  }
+  updateGrid();
+}
+
+// ==========================================
+//  NAVIGATION
+// ==========================================
+function goToQuestion(idx) {
+  currentQ = idx;
+  renderQuestion();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextQuestion() { if (currentQ < questions.length-1) { currentQ++; renderQuestion(); } }
+function prevQuestion() { if (currentQ > 0) { currentQ--; renderQuestion(); } }
+
+// ==========================================
+//  TIMER
+// ==========================================
+function startTimer() {
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      autoSubmit('Waktu ujian habis!');
+      return;
+    }
+    const m = Math.floor(timeLeft/60).toString().padStart(2,'0');
+    const s = (timeLeft%60).toString().padStart(2,'0');
+    document.getElementById('timer').textContent = `${m}:${s}`;
+    const box = document.getElementById('timer-box');
+    box.className = 'timer-box';
+    if (timeLeft <= 300) box.classList.add('danger');
+    else if (timeLeft <= 600) box.classList.add('warning');
+  }, 1000);
+}
+
+// ==========================================
+//  ANTI CHEAT
+// ==========================================
+function initAntiCheat() {
+  document.addEventListener('visibilitychange', handleVisibility);
+  window.addEventListener('blur', handleBlur);
+  document.addEventListener('keydown', blockKeys);
+  document.addEventListener('contextmenu', e => e.preventDefault());
+}
+
+function handleVisibility() {
+  if (!examActive || submitted) return;
+  if (document.hidden) triggerCheatWarning();
+}
+
+function handleBlur() {
+  if (!examActive || submitted) return;
+  triggerCheatWarning();
+}
+
+function blockKeys(e) {
+  if (!examActive) return;
+  const blocked = (e.key==='F12') || (e.ctrlKey && e.shiftKey && e.key==='I') || (e.ctrlKey && e.key==='u') || (e.ctrlKey && e.key==='U') || (e.ctrlKey && e.key==='c' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) || (e.ctrlKey && e.key==='C');
+  if (blocked) { e.preventDefault(); e.stopPropagation(); }
+}
+
+function triggerCheatWarning() {
+  if (submitted) return;
+  violations++;
+  document.getElementById('violation-badge').textContent = `Pelanggaran: ${violations}/3`;
+  
+  if (violations >= 3) {
+    hideCheatOverlay();
+    autoSubmit('Ujian otomatis dikumpulkan karena 3 kali pelanggaran tab.');
+    return;
+  }
+  
+  document.getElementById('cheat-overlay').classList.add('active');
+  let count = 10;
+  document.getElementById('cheat-countdown').textContent = count;
+  cheatInterval = setInterval(() => {
+    count--;
+    document.getElementById('cheat-countdown').textContent = count;
+    if (count <= 0) {
+      clearInterval(cheatInterval);
+      hideCheatOverlay();
+      autoSubmit('Tidak kembali dalam 10 detik!');
+    }
+  }, 1000);
+}
+
+function returnFromCheat() {
+  clearInterval(cheatInterval);
+  hideCheatOverlay();
+}
+
+function hideCheatOverlay() {
+  document.getElementById('cheat-overlay').classList.remove('active');
+}
+
+// ==========================================
+//  SUBMIT
+// ==========================================
+function confirmSubmit() {
+  let unanswered = questions.filter(q => !answers[q.id] || answers[q.id]==='').length;
+  document.getElementById('modal-title').textContent = 'Kumpulkan Ujian?';
+  document.getElementById('modal-desc').textContent = `${unanswered > 0 ? `⚠️ Masih ada ${unanswered} soal yang belum dijawab. ` : '✅ Semua soal sudah dijawab. '}Apakah kamu yakin ingin mengumpulkan ujian?`;
+  document.getElementById('modal-overlay').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('active');
+}
+
+function submitExam() {
+  closeModal();
+  finishExam();
+}
+
+function autoSubmit(reason) {
+  if (submitted) return;
+  submitted = true;
+  examActive = false;
+  clearInterval(timerInterval);
+  removeEventListeners();
+  alert(`⚠️ ${reason}\nJawaban kamu otomatis dikumpulkan.`);
+  showResultPage();
+}
+
+function finishExam() {
+  if (submitted) return;
+  submitted = true;
+  examActive = false;
+  clearInterval(timerInterval);
+  removeEventListeners();
+  showResultPage();
+}
+
+function removeEventListeners() {
+  document.removeEventListener('visibilitychange', handleVisibility);
+  window.removeEventListener('blur', handleBlur);
+}
+
+// ==========================================
+//  RESULT PAGE
+// ==========================================
+function showResultPage() {
+  showPage('result');
+  document.getElementById('result-student-info').textContent = `${studentInfo.name} · Kelas ${studentInfo.kelas} · NIS: ${studentInfo.nis}`;
+  
+  let correct=0, wrong=0, unanswered=0;
+  const details = questions.map(q => {
+    const userAns = answers[q.id] || '';
+    let isCorrect = false;
+    if (q.type === 'KOMPLEKS') {
+      // Sort both
+      isCorrect = userAns.split('').sort().join('') === q.answer.split('').sort().join('');
+    } else if (q.type === 'JODOH') {
+      const correctArr = q.answer;
+      const userArr = userAns ? userAns.split(',') : [];
+      isCorrect = correctArr.every((a,i) => a === userArr[i]);
+    } else {
+      isCorrect = userAns.toUpperCase() === q.answer.toUpperCase();
+    }
+    if (!userAns) { unanswered++; isCorrect=false; }
+    else if (isCorrect) correct++;
+    else wrong++;
+    return { q, userAns, isCorrect, unanswered: !userAns };
+  });
+  
+  const score = Math.round((correct/questions.length)*100);
+  document.getElementById('result-score').textContent = score;
+  
+  // Summary
+  document.getElementById('result-summary').innerHTML = `
+    <div class="summary-card blue"><div class="s-value">${questions.length}</div><div class="s-label">Total Soal</div></div>
+    <div class="summary-card green"><div class="s-value">${correct}</div><div class="s-label">✅ Benar</div></div>
+    <div class="summary-card red"><div class="s-value">${wrong}</div><div class="s-label">❌ Salah</div></div>
+    <div class="summary-card orange"><div class="s-value">${unanswered}</div><div class="s-label">⬜ Kosong</div></div>`;
+  
+  // Suggestion
+  let sug = '';
+  if (score >= 85) sug = `<li>Pertahankan prestasimu! Lanjutkan dengan materi IPA kelas 9.</li><li>Coba tantang dirimu dengan soal olimpiade IPA tingkat kabupaten.</li>`;
+  else if (score >= 70) sug = `<li>Ulangi materi tentang soal-soal yang salah, terutama konsep rumus.</li><li>Latih lebih banyak soal cerita HOTS untuk meningkatkan kemampuan analisis.</li>`;
+  else sug = `<li>Pelajari ulang materi Gelombang dan Cahaya dari buku teks IPA SMP.</li><li>Minta bimbingan guru untuk materi Tekanan Zat dan Sistem Ekskresi.</li><li>Gunakan video pembelajaran di platform edukasi untuk pemahaman lebih baik.</li>`;
+  
+  document.getElementById('suggestion-box').innerHTML = `
+    <h3>💡 Saran Pembelajaran untuk ${studentInfo.name}</h3>
+    <ul class="suggestion-list">${sug}<li>Kerjakan latihan soal secara rutin setiap hari minimal 10 soal.</li></ul>`;
+  
+  // Detail
+  let detailHtml = '';
+  details.forEach(({q, userAns, isCorrect, unanswered}) => {
+    const cls = unanswered ? 'unanswered' : isCorrect ? 'correct' : 'wrong';
+    const icon = unanswered ? '⬜' : isCorrect ? '✅' : '❌';
+    const displayAns = userAns || '(tidak dijawab)';
+    detailHtml += `
+      <div class="detail-item ${cls}">
+        <div class="detail-q-num">${icon} Soal ${q.id} · ${q.difficulty} · ${getTypeName(q.type)}</div>
+        <div class="detail-q-text">${q.content.substring(0,120)}${q.content.length>120?'...':''}</div>
+        <div class="detail-answers">
+          <div class="detail-answer-item">Jawaban kamu: <span class="answer-chip student">${displayAns}</span></div>
+          <div class="detail-answer-item">Kunci: <span class="answer-chip correct-ans">${q.answer}</span></div>
+        </div>
+        <div class="detail-explanation">📚 ${q.explanation}</div>
+      </div>`;
+  });
+  document.getElementById('result-detail').innerHTML = detailHtml;
+}
+
+function downloadResult() {
+  alert('💡 Gunakan Ctrl+P atau tombol Cetak untuk menyimpan hasil sebagai PDF melalui "Save as PDF" di dialog cetak.');
+}
+
+function restartExam() {
+  if (confirm('Apakah kamu yakin ingin mengulang ujian dari awal?')) {
+    answers = {}; flags = {}; currentQ = 0; violations = 0; submitted = false;
+    timeLeft = 45*60;
+    showPage('home');
+  }
+}
+
+// ==========================================
+//  TEACHER MODE
+// ==========================================
+function openTeacherLogin() {
+  document.getElementById('pw-modal-overlay').classList.add('active');
+  document.getElementById('pw-input').value = '';
+  document.getElementById('pw-error').style.display = 'none';
+  setTimeout(() => document.getElementById('pw-input').focus(), 100);
+}
+
+function closeTeacherLogin() {
+  document.getElementById('pw-modal-overlay').classList.remove('active');
+}
+
+function checkPassword() {
+  const pw = document.getElementById('pw-input').value;
+  if (pw === '123') {
+    closeTeacherLogin();
+    showPage('teacher');
+    document.body.classList.add('allow-select');
+    renderTeacherPage();
+  } else {
+    document.getElementById('pw-error').style.display = 'block';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+function exitTeacherMode() {
+  showPage('home');
+  document.body.classList.remove('allow-select');
+}
+
+function switchTab(tab, el) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-bank').style.display = tab==='bank' ? 'block' : 'none';
+  document.getElementById('tab-key').style.display = tab==='key' ? 'block' : 'none';
+  if (tab==='key') renderAnswerKey();
+}
+
+function renderTeacherPage() {
+  renderTeacherQuestions();
+  renderAnswerKey();
+}
+
+function renderTeacherQuestions() {
+  const list = document.getElementById('teacher-questions-list');
+  list.innerHTML = '';
+  questions.forEach((q, idx) => {
+    const div = document.createElement('div');
+    div.className = 'q-editor-card';
+    div.id = `te-card-${idx}`;
+    div.innerHTML = buildEditorCard(q, idx);
+    list.appendChild(div);
+  });
+}
+
+function buildEditorCard(q, idx) {
+  const letters = ['A','B','C','D'];
+  let optionsHtml = '';
+  if (q.type === 'PG' || q.type === 'KOMPLEKS') {
+    optionsHtml = `<div class="editor-options">`;
+    letters.forEach((l, i) => {
+      const isCorrect = q.answer.includes(l);
+      optionsHtml += `<div class="editor-option-row">
+        <span class="option-letter-label">${l}.</span>
+        <input class="editor-field" style="flex:1;resize:none;padding:7px 10px;" value="${(q.options[i]||'').replace(/"/g,'&quot;')}" onchange="updateQOption(${q.id},${i},this.value)" placeholder="Pilihan ${l}">
+        <div class="correct-indicator ${isCorrect?'active':''}" title="Klik untuk tandai jawaban benar" onclick="toggleCorrect(${q.id},'${l}',this)"></div>
+      </div>`;
+    });
+    optionsHtml += `</div>`;
+  }
+  
+  return `
+    <div class="q-editor-header">
+      <div class="q-editor-num">${idx+1}</div>
+      <div class="q-editor-type">
+        <select class="editor-field" style="padding:5px 8px;font-size:12px;" onchange="updateQField(${q.id},'type',this.value)">
+          <option value="PG" ${q.type==='PG'?'selected':''}>Pilihan Ganda</option>
+          <option value="KOMPLEKS" ${q.type==='KOMPLEKS'?'selected':''}>PG Kompleks</option>
+          <option value="BS" ${q.type==='BS'?'selected':''}>Benar/Salah</option>
+          <option value="JODOH" ${q.type==='JODOH'?'selected':''}>Menjodohkan</option>
+          <option value="ISIAN" ${q.type==='ISIAN'?'selected':''}>Isian</option>
+        </select>
+        <select class="editor-field" style="padding:5px 8px;font-size:12px;margin-left:6px;" onchange="updateQField(${q.id},'difficulty',this.value)">
+          <option value="REGULER" ${q.difficulty==='REGULER'?'selected':''}>REGULER</option>
+          <option value="HOTS" ${q.difficulty==='HOTS'?'selected':''}>HOTS</option>
+        </select>
+      </div>
+      <div class="q-editor-actions">
+        <button class="btn-icon danger" title="Hapus soal" onclick="deleteQuestion(${idx})">🗑️</button>
+      </div>
+    </div>
+    <div style="margin-bottom:10px;">
+      <label class="editor-label">Pengantar Soal (opsional)</label>
+      <textarea class="editor-field" rows="2" onchange="updateQField(${q.id},'intro',this.value)" placeholder="Teks pengantar sebelum soal...">${q.intro||''}</textarea>
+    </div>
+    <div style="margin-bottom:10px;">
+      <label class="editor-label">URL Gambar (kosongkan jika tidak ada)</label>
+      <input class="editor-field" type="url" value="${q.image||''}" onchange="updateQField(${q.id},'image',this.value||null)" placeholder="https://example.com/gambar.jpg">
+    </div>
+    <div style="margin-bottom:10px;">
+      <label class="editor-label">Pertanyaan / Soal <span style="color:var(--danger)">*</span></label>
+      <textarea class="editor-field" rows="3" onchange="updateQField(${q.id},'content',this.value)">${q.content}</textarea>
+    </div>
+    ${optionsHtml}
+    <div class="editor-grid" style="margin-top:10px;">
+      <div>
+        <label class="editor-label">Kunci Jawaban</label>
+        <input class="editor-field" value="${q.answer}" onchange="updateQField(${q.id},'answer',this.value.toUpperCase())" placeholder="A / B / C / D">
+      </div>
+    </div>
+    <div style="margin-top:10px;">
+      <label class="editor-label">Penjelasan Jawaban</label>
+      <textarea class="editor-field" rows="2" onchange="updateQField(${q.id},'explanation',this.value)">${q.explanation}</textarea>
+    </div>`;
+}
+
+function updateQField(id, field, val) {
+  const q = questions.find(q=>q.id===id);
+  if (q) { q[field] = val; renderAnswerKey(); }
+}
+
+function updateQOption(id, idx, val) {
+  const q = questions.find(q=>q.id===id);
+  if (q && q.options) q.options[idx] = val;
+}
+
+function toggleCorrect(id, letter, el) {
+  const q = questions.find(q=>q.id===id);
+  if (!q) return;
+  if (q.type === 'PG' || q.type === 'BS') {
+    // Single answer
+    q.answer = letter;
+    // Update all indicators in this card
+    const card = el.closest('.q-editor-card');
+    card.querySelectorAll('.correct-indicator').forEach(ci => ci.classList.remove('active'));
+    el.classList.add('active');
+  } else {
+    // Multiple
+    let ans = q.answer || '';
+    if (ans.includes(letter)) ans = ans.replace(letter,'');
+    else ans += letter;
+    q.answer = ans.split('').sort().join('');
+    el.classList.toggle('active');
+  }
+  renderAnswerKey();
+}
+
+function deleteQuestion(idx) {
+  if (!confirm(`Hapus soal nomor ${idx+1}?`)) return;
+  questions.splice(idx, 1);
+  questions.forEach((q,i) => q.id = i+1);
+  renderTeacherQuestions();
+  renderAnswerKey();
+}
+
+function addNewQuestion() {
+  const newId = questions.length + 1;
+  questions.push({
+    id: newId,
+    type: 'PG',
+    intro: null,
+    content: 'Pertanyaan baru...',
+    image: null,
+    options: ['Pilihan A','Pilihan B','Pilihan C','Pilihan D'],
+    answer: 'A',
+    difficulty: 'REGULER',
+    explanation: 'Penjelasan jawaban...'
+  });
+  renderTeacherQuestions();
+  renderAnswerKey();
+  setTimeout(() => {
+    const cards = document.querySelectorAll('.q-editor-card');
+    if (cards.length > 0) cards[cards.length-1].scrollIntoView({behavior:'smooth'});
+  }, 100);
+}
+
+function renderAnswerKey() {
+  const grid = document.getElementById('answer-key-grid');
+  if (!grid) return;
+  grid.innerHTML = questions.map(q => `
+    <div class="answer-key-item">
+      <span class="aq-num">${q.id}</span>
+      <span class="aq-ans">${q.answer}</span>
+      <span class="aq-diff ${q.difficulty}">${q.difficulty}</span>
+    </div>`).join('');
+}
+
+// ==========================================
+//  INIT
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+  // Restore saved data if any
+  try {
+    const saved = localStorage.getItem('asat_answers');
+    if (saved) {
+      const data = JSON.parse(saved);
+      // Don't auto-restore, just have it ready
+    }
+  } catch(e) {}
+  
+  // Enter key for home form
+  document.getElementById('input-nis').addEventListener('keydown', e => {
+    if (e.key === 'Enter') startExam();
+  });
+});
+</script>
+</body>
+</html>
